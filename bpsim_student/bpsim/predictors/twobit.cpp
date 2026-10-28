@@ -7,21 +7,33 @@
 #include "predictor.h"
 
 class TwoBitPredictor : public BranchPredictor {
-  // TODO: constants, e.g.  static constexpr unsigned INDEX_BITS = ...;
-  // TODO: storage,   e.g.  Table counters_{1u << INDEX_BITS, 2, 1, Unsigned, "counters"};
+  static constexpr unsigned INDEX_BITS = 15;
+  Table outcome_state_{1u << INDEX_BITS, 2, 2, Unsigned, "outcome_state"};
 
- public:
-  bool predict(uint64_t pc) override {
-    // TODO
-    (void)pc;
-    return false;
+  static uint64_t index(uint64_t pc){
+    return (pc>>2) & ((1u<<INDEX_BITS)-1);
   }
 
-  void update(uint64_t pc, bool taken) override {
-    // TODO
-    (void)pc;
-    (void)taken;
-  }
+  public:
+    bool predict(uint64_t pc) override {
+      uint64_t index_value=index(pc);
+      if(outcome_state_.get(index_value) >= 2){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+
+    void update(uint64_t pc, bool taken) override {
+      uint64_t index_value=index(pc);
+      if(taken){
+        outcome_state_.inc(index_value);
+      }
+      else{
+        outcome_state_.dec(index_value);
+      }
+    }
 };
 
 REGISTER_PREDICTOR("twobit", TwoBitPredictor);

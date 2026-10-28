@@ -28,3 +28,6 @@ __pycache__/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# bpsim simulator binary (built by make, no extension)
+bpsim_student/bpsim/bpsim
