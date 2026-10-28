@@ -7,21 +7,23 @@
 #include "predictor.h"
 
 class OneBitPredictor : public BranchPredictor {
-  // TODO: constants, e.g.  static constexpr unsigned INDEX_BITS = ...;
-  // TODO: storage,   e.g.  Table counters_{1u << INDEX_BITS, 2, 1, Unsigned, "counters"};
+  static constexpr unsigned INDEX_BITS = 16;
+  Table latest_outcomes_{1u << INDEX_BITS, 1, 1, Unsigned, "latest_outcomes"};
 
- public:
-  bool predict(uint64_t pc) override {
-    // TODO
-    (void)pc;
-    return false;
+  static uint64_t index(uint64_t pc){
+    return (pc>>2) & ((1u<<INDEX_BITS)-1);
   }
 
-  void update(uint64_t pc, bool taken) override {
-    // TODO
-    (void)pc;
-    (void)taken;
-  }
+  public:
+    bool predict(uint64_t pc) override {
+      uint64_t index_value=index(pc);
+      return latest_outcomes_.get(index_value);
+    }
+
+    void update(uint64_t pc, bool taken) override {
+      uint64_t index_value=index(pc);
+      latest_outcomes_.set(index_value, taken);
+    }
 };
 
 REGISTER_PREDICTOR("onebit", OneBitPredictor);
