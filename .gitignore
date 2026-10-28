@@ -1,0 +1,30 @@
+# Course handouts - keep local, don't redistribute
+*.pdf
+
+# Build outputs (adjust once you know your language/toolchain)
+*.o
+*.obj
+*.out
+*.exe
+*.a
+*.so
+build/
+bin/
+
+# Large simulator traces / generated results (commit summaries, not raw dumps)
+*.gz
+*.trace
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Editor / OS junk
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+Desktop.ini
+.DS_Store
