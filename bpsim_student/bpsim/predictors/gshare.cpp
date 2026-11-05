@@ -7,20 +7,40 @@
 #include "predictor.h"
 
 class GsharePredictor : public BranchPredictor {
-  // TODO: constants, e.g.  static constexpr unsigned INDEX_BITS = ...;
-  // TODO: storage,   e.g.  Table counters_{1u << INDEX_BITS, 2, 1, Unsigned, "counters"};
+  static constexpr unsigned INDEX_BITS = 14;
+  Table counters_{1u << INDEX_BITS, 2, 2, Unsigned, "counters"};
+  Register ghr{6, 0, Unsigned, "ghr"};
+
+  uint64_t calcIndex(uint64_t ghr, uint64_t pc){
+    pc = pc>>2;
+    uint64_t index = ghr ^ pc ;
+    index = (index) & ((1u<<INDEX_BITS) -1);
+    return index;
+  }
 
  public:
   bool predict(uint64_t pc) override {
-    // TODO
-    (void)pc;
-    return false;
+    uint64_t index_value = calcIndex(ghr.get(), pc);
+    if(counters_.get(index_value) >= 2){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   void update(uint64_t pc, bool taken) override {
-    // TODO
-    (void)pc;
-    (void)taken;
+    uint64_t index_value = calcIndex(ghr.get(), pc);
+    if (taken)
+    {
+      counters_.inc(index_value);
+    }
+    else{
+      counters_.dec(index_value);
+    }
+
+    //update ghr
+    ghr.shiftIn(taken);
   }
 };
 

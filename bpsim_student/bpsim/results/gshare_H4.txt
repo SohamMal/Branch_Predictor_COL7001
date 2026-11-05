@@ -1,0 +1,9 @@
+predictor: gshare (32772 bits)
+trace                            branches  mispredicts  accuracy     MPKI
+alternate.trace.gz                1000000       103285    89.67%   20.662
+biased.trace.gz                   1000000        68631    93.14%   13.729
+correlated.trace.gz               1000000       142569    85.74%   28.523
+large.trace.gz                    1000000       356705    64.33%   71.364
+loops.trace.gz                    1000000        77360    92.26%   15.465
+mixed.trace.gz                    1000000       141370    85.86%   28.272
+average MPKI: 29.669
