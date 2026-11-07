@@ -1,0 +1,9 @@
+predictor: tournament (55810 bits)
+trace                            branches  mispredicts  accuracy     MPKI
+alternate.trace.gz                1000000        44507    95.55%    8.904
+biased.trace.gz                   1000000        65162    93.48%   13.035
+correlated.trace.gz               1000000       136404    86.36%   27.290
+large.trace.gz                    1000000       350964    64.90%   70.215
+loops.trace.gz                    1000000        20875    97.91%    4.173
+mixed.trace.gz                    1000000        82839    91.72%   16.567
+average MPKI: 23.364

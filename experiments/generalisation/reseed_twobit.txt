@@ -1,0 +1,9 @@
+predictor: twobit (65536 bits)
+trace                            branches  mispredicts  accuracy     MPKI
+alternate.trace.gz                1000000       274087    72.59%   54.825
+biased.trace.gz                   1000000        65719    93.43%   13.146
+correlated.trace.gz               1000000       499482    50.05%   99.826
+large.trace.gz                    1000000       260688    73.93%   52.157
+loops.trace.gz                    1000000       139202    86.08%   27.825
+mixed.trace.gz                    1000000       203407    79.66%   40.710
+average MPKI: 48.082

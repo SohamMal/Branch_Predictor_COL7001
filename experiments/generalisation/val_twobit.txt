@@ -1,0 +1,10 @@
+predictor: twobit (65536 bits)
+trace                            branches  mispredicts  accuracy     MPKI
+v_corr_d1.trace.gz                1000000       485782    51.42%   97.159
+v_corr_d12.trace.gz               1000000       220686    77.93%   44.143
+v_corr_d4.trace.gz                1000000       353319    64.67%   70.702
+v_corr_d8.trace.gz                1000000       199638    80.04%   39.932
+v_mix_large.trace.gz              1000000       207937    79.21%   41.568
+v_mix_medium.trace.gz             1000000       205401    79.46%   41.095
+v_mix_small.trace.gz              1000000       218716    78.13%   43.719
+average MPKI: 54.046
