@@ -21,7 +21,7 @@ class MyPredictor : public BranchPredictor {
   static constexpr unsigned TAG_BITS[] = {0, 7, 8, 8, 9, 10, 11, 12};
   static constexpr unsigned U_TICK_BITS = 18;
     // loop predictor: 32 direct-mapped entries
-  static constexpr unsigned LOOP_LOG = ;
+  static constexpr unsigned LOOP_LOG = 7;
   static constexpr unsigned LOOP_TAG_BITS = 10;
   static constexpr unsigned LOOP_ITER_BITS = 10;                      // loops up to 1023 iterations
   static constexpr unsigned LOOP_ITER_MAX = (1u << LOOP_ITER_BITS) - 1;
